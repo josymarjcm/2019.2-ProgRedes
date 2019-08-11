@@ -1,3 +1,4 @@
+#Aluno: Josymar Cortez de Melo
 import socket
 HOST = '10.0.0.106' #ip do server
 PORT = 55454 # porta do server
