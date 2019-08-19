@@ -11,9 +11,10 @@ def primos(var):
       cont += 1
   if cont == 2 and var > 1:
     fat = var
-    var = str(var) + '\n'
+    fator=fatorial(var)
+    var = str(var) +" - "+ str(fator) +'\n'
     fd_primos.write(var)
-    fator=fatorial(fat)
+
     
   else:
     var = str(var) + '\n'
@@ -24,6 +25,7 @@ def fatorial(fat):
   total = 1
   for f in range(1, fat+1):
     total = total * f
+  return(total)
   
 
 num = int(input("Digite um valor: "))
