@@ -14,23 +14,23 @@ def primos(var):
     var = str(var) + '\n'
     fd_primos.write(var)
     fator=fatorial(fat)
-    return("é PRIMO",fator)
+    
   else:
     var = str(var) + '\n'
     fd_nprimos.write(var)
-    return ("")
+    
 
 def fatorial(fat):
   total = 1
   for f in range(1, fat+1):
     total = total * f
-  return (total)
+  
 
 num = int(input("Digite um valor: "))
 
 inicio = time.time()
 for var in range (1, num+1):
-  print(var,primos(var))
+  primos(var)
 
 termino = time.time()
 
