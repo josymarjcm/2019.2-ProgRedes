@@ -12,13 +12,10 @@ def primos(var):
       cont += 1
   if cont == 2 and var > 1:
     fat = var
-    #fator=fatorial(var)
     num_fat =  threading.Thread(target=fatorial, args=(fat, ), name='p2')
     num_fat.start()
     var = str(var) +" - "+ str(num_fat) +'\n'
     fd_primos.write(var)
-    
-
   else:
     var = str(var) + '\n'
     fd_nprimos.write(var)
@@ -30,13 +27,10 @@ def fatorial(fat):
     total = total * f
   return(total)
   
-
 num = int(input("Digite um valor: "))
 
 inicio = time.time()
 for var in range (1, num+1):
-  #primos(var)
-
   num_vez = threading.Thread(target=primos, args=(var, ), name='p1')
   num_vez.start()
 
