@@ -1,6 +1,7 @@
 import json
 import xml.etree.ElementTree as ET
 import requests
+from xml.dom import minidom
 
 while True:
 	
@@ -37,8 +38,20 @@ while True:
 	   	#	print('CEP: {0} / Cidade: {1} / Estado: {2}'.format(dados_cep[i]['cep'], dados_cep[i]['logradouro'], dados_cep[i]['bairro']))
 		break
 	elif formato_retorno.lower()=="xml":
-		dados_cep = ET.
-		print(dados_cep)
+		arqxml = open('arqxml.xml', 'w')
+		dados_cep = getInformacoes()
+		arqxml.write(dados_cep)
+		
+		print(arqxml)
+		'''arq = minidom.parseString(arqxml)
+
+		itemlist = arq.getElementsByTagName('cep')
+		itemlist2 = arq.getElementsByTagName('localidade')
+		itemlist3 = arq.getElementsByTagName('uf') 
+
+		print('CEP: {0} / Cidade: {1} / Estado: {2}'.format(itemlist, itemlist2, itemlist3))
+    	#print('CEP: {0} / Cidade: {1} / Estado: {2}'.format(root.get('cep'), root.get('localidade'), root.get('uf')))
+		'''
 		break
 	else:
 		print("Formato inválido.")
