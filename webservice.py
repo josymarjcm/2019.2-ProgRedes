@@ -2,6 +2,7 @@ import json
 import xml.etree.ElementTree as ET
 import requests
 from xml.dom import minidom
+from xml.etree.ElementTree import Element, ElementTree 
 
 while True:
 	
@@ -41,8 +42,34 @@ while True:
 		arqxml = open('arqxml.xml', 'w')
 		dados_cep = getInformacoes()
 		arqxml.write(dados_cep)
+		arqxml.close()
+
+		tree = ElementTree(file="arqxml.xml")
+		r = tree.getroot()
+		cep = r.find('cep')
+
+		fxml = open('Dados_cep.txt','w')
+		arqxml = open('arqxml.xml', 'r')
+		cont = 0
+		while cont < 12:
+
+			cont+=1
+		'''for i in arqxml:
+			linha = i.readline()
+			print(linha)
+			cont+=1
+			if cont == 3:
+				print(linha)
+				fxml.write(linha)
+			elif cont == 7:
+				print(linha)
+				fxml.write(linha)
+			elif cont == 8:
+				print(linha)
+				fxml.write(linha)
+		#arqxml.write(dados_cep)'''
 		
-		print(arqxml)
+		
 		'''arq = minidom.parseString(arqxml)
 
 		itemlist = arq.getElementsByTagName('cep')
@@ -55,3 +82,5 @@ while True:
 		break
 	else:
 		print("Formato inválido.")
+
+
