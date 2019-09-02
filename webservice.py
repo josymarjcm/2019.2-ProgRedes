@@ -7,8 +7,8 @@ from xml.etree.ElementTree import Element, ElementTree
 while True:
 	
 	# Variaveis a serem passadas como parâmetros das URLs da API
-	numero_cep      = 59170000#int(input("Digite o cep: "))
-	formato_retorno = 'xml'#input("Digite o formato: ")
+	numero_cep      = int(input("Digite o cep: "))
+	formato_retorno = input("Digite o formato: ")
 
 	# Variaveis a serem passadas como parâmetros das URLs da API
 	#
@@ -31,9 +31,10 @@ while True:
 		print('')
 		
 		# Imprimindo o dado tratado
-		print('CEP: {0} / Cidade: {1} / Estado: {2}'.format(dados_cep['cep'], dados_cep['localidade'], dados_cep['uf']))
+		print(' CEP: {0}\n Logradouro: {1}\n Bairro: {2}\n Cidade: {3}\n Estado: {4}\n IBGE: {5}\n'.format(dados_cep['cep'], 
+			dados_cep['logradouro'], dados_cep['bairro'], dados_cep['localidade'], dados_cep['uf'], dados_cep['ibge']))
 
-	   	#	print('CEP: {0} / Cidade: {1} / Estado: {2}'.format(dados_cep[i]['cep'], dados_cep[i]['logradouro'], dados_cep[i]['bairro']))
+	   	
 		break
 	elif formato_retorno.lower()=="xml":
 		arqxml = open('arqxml.xml', 'w')
@@ -43,48 +44,52 @@ while True:
 		arqxml.write(dados_cep)
 		arqxml.close()
 
-		'''tree = ElementTree(file="arqxml.xml")
-		r = tree.getroot()
-		cep = r.find('cep')'''
-
-		#fxml = open('Dados_cep.txt', 'w')
 		arqxml = open('arqxml.xml', 'r')
 		cont = 0
+		#Tratando o dado XML:
 		for i in range(12):
 			cont+=1
 			linha = arqxml.readline()
-			#print(linha)
 			if cont == 3:
 				cep1 = "<cep>"
 				cep2 = "</cep>"
 				linha = linha.replace(cep1, "")
 				linha = linha.replace(cep2, "")
-				fxml1 = linha
+				fxml3 = linha
+			elif cont == 4:
+				logradouro1 = "<logradouro>"
+				logradouro2 = "</logradouro>"
+				linha = linha.replace(logradouro1,"")
+				linha = linha.replace(logradouro2,"")
+				fxml4 = linha
+			elif cont == 6:
+				bairro1 = "<bairro>"
+				bairro2 = "</bairro>"
+				linha = linha.replace(bairro1, "")
+				linha = linha.replace(bairro2, "")
+				fxml6 = linha
 			elif cont == 7:
 				localidade1 = "<localidade>"
 				localidade2 = "</localidade>"
 				linha = linha.replace(localidade1, "")
 				linha = linha.replace(localidade2, "")
-				fxml2 = linha
+				fxml7 = linha
 			elif cont == 8:
 				uf1 = "<uf>"
 				uf2 = "</uf>"
 				linha = linha.replace(uf1,"")
 				linha = linha.replace(uf2,"")
-				fxml3 = linha
-		print(f'CEP:{fxml1}Estado:{fxml3}Cidade{fxml2}')
-		#print('CEP:    {0}Estado: {1}Cidade: {2} '.format(fxml1, fxml3, fxml2))
-				#fxml.write(linha)
-		#arqxml.write(dados_cep)'''
+				fxml8 = linha
+			elif cont == 10:
+				ibge1 = "<ibge>"
+				ibge2 = "</ibge>"
+				linha = linha.replace(ibge1,"")
+				linha = linha.replace(ibge2,"")
+				fxml10 = linha
+		# Imprimindo o dado tratado
+		print("")
+		print(f' CEP:{fxml3} Logradouro:{fxml4} Bairro:{fxml6} Localidade:{fxml7} Estado:{fxml8} IBGE:{fxml10}')
 		
-		
-		'''arq = minidom.parseString(arqxml)
-		itemlist = arq.getElementsByTagName('cep')
-		itemlist2 = arq.getElementsByTagName('localidade')
-		itemlist3 = arq.getElementsByTagName('uf') 
-		print('CEP: {0} / Cidade: {1} / Estado: {2}'.format(itemlist, itemlist2, itemlist3))
-    	#print('CEP: {0} / Cidade: {1} / Estado: {2}'.format(root.get('cep'), root.get('localidade'), root.get('uf')))
-		'''
 		break
 	else:
 		print("Formato inválido.")
