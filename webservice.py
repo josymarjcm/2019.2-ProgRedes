@@ -31,8 +31,8 @@ while True:
 		print('')
 		
 		# Imprimindo o dado tratado
-		print(' CEP: {0}\n Logradouro: {1}\n Bairro: {2}\n Cidade: {3}\n Estado: {4}\n IBGE: {5}\n'.format(dados_cep['cep'], 
-			dados_cep['logradouro'], dados_cep['bairro'], dados_cep['localidade'], dados_cep['uf'], dados_cep['ibge']))
+		print(' CEP:         {0}\n Logradouro:  {1}\n Bairro:      {2}\n Cidade:      {3}\n Estado:      {4}\n'.format(dados_cep['cep'], 
+			dados_cep['logradouro'], dados_cep['bairro'], dados_cep['localidade'], dados_cep['uf']))
 
 	   	
 		break
@@ -80,15 +80,10 @@ while True:
 				linha = linha.replace(uf1,"")
 				linha = linha.replace(uf2,"")
 				fxml8 = linha
-			elif cont == 10:
-				ibge1 = "<ibge>"
-				ibge2 = "</ibge>"
-				linha = linha.replace(ibge1,"")
-				linha = linha.replace(ibge2,"")
-				fxml10 = linha
+			
 		# Imprimindo o dado tratado
 		print("")
-		print(f' CEP:{fxml3} Logradouro:{fxml4} Bairro:{fxml6} Localidade:{fxml7} Estado:{fxml8} IBGE:{fxml10}')
+		print(f' CEP:        {fxml3} Logradouro: {fxml4} Bairro:     {fxml6} Localidade: {fxml7} Estado:     {fxml8}')
 		
 		break
 	else:
