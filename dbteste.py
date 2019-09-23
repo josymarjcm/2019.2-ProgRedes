@@ -66,7 +66,7 @@ def deletarBanco():
     conexao.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     cursor = conexao.cursor()
     cod_del = input("Digite o codigo da disciplina que você quer deletar: ")
-    cursor.execute('DELETE FROM disciplinas WHERE cod_disc = "{0}"'.format(cod_del))
+    cursor.execute('DELETE FROM disciplinas WHERE cd_disc = "{0}"'.format(cod_del))
     conexao.commit()
     conexao.close
     operacao()
