@@ -12,7 +12,7 @@ def principal():
 def existeTabela(strNomeTabela):
    exists = False
    try:
-      conexao = psycopg2.connect('dbname=disciplinas_cursadas user=postgres host=localhost password=postgres')
+      conexao = psycopg2.connect('dbname=disciplinas_cursadas user=postgres host=localhost password=1234')
       cursor = conexao.cursor()
       cursor.execute('SELECT EXISTS(SELECT relname FROM pg_class WHERE relname=\'{0}\');'.format(strNomeTabela))
       exists = cursor.fetchone()[0]
@@ -23,11 +23,11 @@ def existeTabela(strNomeTabela):
    
 def criarBanco():
     from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-    conexao = psycopg2.connect('dbname=postgres user=postgres host=localhost password=postgres')
+    conexao = psycopg2.connect('dbname=postgres user=postgres host=localhost password=1234')
     conexao.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     cursor = conexao.cursor()
     cursor.execute('CREATE DATABASE disciplinas_cursadas')
-    conexao = psycopg2.connect('dbname=disciplinas_cursadas user=postgres host=localhost password=postgres')
+    conexao = psycopg2.connect('dbname=disciplinas_cursadas user=postgres host=localhost password=1234')
     cursor = conexao.cursor()
     cursor.execute('CREATE TABLE disciplinas (cd_disc VARCHAR(2) PRIMARY KEY, nome VARCHAR(30), notas VARCHAR(2));')
     conexao.commit()
@@ -36,7 +36,7 @@ def criarBanco():
 
 def lerBanco():
     from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-    conexao = psycopg2.connect('dbname=disciplinas_cursadas user=postgres host=localhost password=postgres')
+    conexao = psycopg2.connect('dbname=disciplinas_cursadas user=postgres host=localhost password=1234')
     conexao.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     cursor = conexao.cursor()
     cursor.execute('SELECT * FROM disciplinas')
@@ -48,31 +48,31 @@ def lerBanco():
 
 def atualizarBanco():
     from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-    conexao = psycopg2.connect('dbname=disciplinas_cursadas user=postgres host=localhost password=postgres')
+    conexao = psycopg2.connect('dbname=disciplinas_cursadas user=postgres host=localhost password=1234')
     conexao.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     cursor = conexao.cursor()
     new_cod = input("Digite código da disciplina: ")
-    new_nome = input("Digite o nome da NOVA disciplina: ")
+    new_nome = input("Digite o NOVO nome da disciplina: ")
     new_notas = input("Digite a NOVA nota da disciplina: ")
     
-    cursor.execute('UPDATE disciplinas SET nome = {1}, notas = {2} WHERE cd_disc = {0}'.format(new_cod, new_nome, new_notas))
+    cursor.execute("""UPDATE disciplinas SET nome='{1}', notas='{2}' WHERE cd_disc='{0}'""".format(new_cod, new_nome, new_notas))
     conexao.commit()
     conexao.close
     operacao()
     
 def deletarBanco():
     from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-    conexao = psycopg2.connect('dbname=disciplinas_cursadas user=postgres host=localhost password=postgres')
+    conexao = psycopg2.connect('dbname=disciplinas_cursadas user=postgres host=localhost password=1234')
     conexao.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     cursor = conexao.cursor()
     cod_del = input("Digite o codigo da disciplina que você quer deletar: ")
-    cursor.execute('DELETE FROM disciplinas WHERE cd_disc = "{0}"'.format(cod_del))
+    cursor.execute("""DELETE FROM disciplinas WHERE cd_disc='{0}'""".format(cod_del))
     conexao.commit()
     conexao.close
     operacao()
 
 def inserePessoa():
-    conexao = psycopg2.connect('dbname=disciplinas_cursadas user=postgres host=localhost password=postgres')
+    conexao = psycopg2.connect('dbname=disciplinas_cursadas user=postgres host=localhost password=1234')
     cursor = conexao.cursor()
     new_cod = input("Digite o codigo da nova disciplina: ")
     new_nome = input("Digite o nome da nova disciplina: ")
