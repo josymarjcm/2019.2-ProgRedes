@@ -2,18 +2,14 @@ import time
 import serial
 from random import randint
 
-connect = serial.Serial('COM10', 9600)
+connect = serial.Serial('COM4', 9600)
 
 l=[]
-i = 0
-while i<100:
+while True:
     a = randint(0,3)
     l.append(a)
-    a = str(a)
-
-    connect.write('a'.encode())
-    #connect.read()
-    time.sleep(2)   
-    i+=1
+    a= str(a)
+    connect.write(a.encode())
+    print(l)
+    time.sleep(1)       
 connect.close()
-print(l)
